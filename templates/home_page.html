@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block contents %}
+
+<div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <div class="some_text text-center">
+          <p>
+            
+                Libraries are multifaceted institutions that serve as gateways to knowledge, education, and community engagement. Acting as invaluable repositories of information, libraries offer a diverse array of resources, from traditional books to digital archives and multimedia materials.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="library_image mt-3">
+          <img src="{% static 'library.png' %}" class="img-fluid rounded" alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="category">
+    {% for i in category%}
+    <a href="{% url 'category_wise_search' i.slug %}" class="btn"
+      >{{i.category_name}}</a
+    >
+    {% endfor %}
+  </div>
+
+<div class="card-container d-flex flex-wrap justify-content-center align-items-center">
+    {% for d in data %}
+    <div class="card" style="width: 18rem; margin: 10px">
+      <img src="{{d.image.url}}" class="card-img-top" alt="..." />
+      <div class="card-body d-flex flex-column h-100">
+        <h4 class="mb-auto">
+            <a href="{%url 'Details_page' d.id%}" class="text-decoration-none text-dark">
+                Book Name: {{d.book_name}}
+            </a>
+        </h4>
+        <p class="card-text">
+          Descriptions: {{d.book_descriptions | truncatewords:20}}
+        </p>
+        <p class="card-text">Borrow Price: {{d.book_price}} $</p>
+        <h5 class="card-text"><strong>Category: </strong>{{d.book_category}}</h5>
+
+
+        {% if request.user.is_authenticated %}
+        <form method="post" action="{% url 'Borrow_page' d.id %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-primary">Borrow</button>
+        </form> 
+        <form method="post" action="{% url 'Return_page' d.id %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-primary">Return</button>
+        </form> 
+        {%endif%}
+
+        
+      </div>
+    </div>
+    {% endfor %}
+</div>
+<p></p>
+{% endblock %}

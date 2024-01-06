@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{%  load crispy_forms_tags %}
+{% block contents %}
+
+<h1>Profile Page</h1>
+{{data|length}}
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Book Name</th>
+        <th scope="col">Status</th>
+        <th scope="col">Time</th>
+      </tr>
+    </thead>
+    <tbody>
+    {%for i in data%}
+      <tr>
+        <td>{{i.user}}</td>
+        <td>{{i.book.book_name}}</td>
+        <td>{{i.title}}</td>
+        <td>{{i.time_stamp}}</td>
+      </tr>
+  {% endfor %}
+{% endblock %}
