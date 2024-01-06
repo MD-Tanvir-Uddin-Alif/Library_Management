@@ -46,17 +46,17 @@
 
 
         {% if request.user.is_authenticated %}
-        <form method="post" action="{% url 'Borrow_page' d.id %}">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-primary">Borrow</button>
-        </form> 
         <form method="post" action="{% url 'Return_page' d.id %}">
           {% csrf_token %}
           <button type="submit" class="btn btn-primary">Return</button>
         </form> 
+        <form method="post" action="{% url 'Borrow_page' d.id %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-primary">Borrow</button>
+        </form>
         {%endif%}
 
-        
+
       </div>
     </div>
     {% endfor %}

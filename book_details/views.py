@@ -38,6 +38,7 @@ def borrow_view(request, id):
             user.balance -= int(book.book_price)
             user.save()
             borrow = BorrowModel.objects.create(book=book,user=user,borrow_status=True,title="Borrowed")
+            # print(borrow.borrow_status)
             borrow.save()
 
         return redirect('Profile_page')

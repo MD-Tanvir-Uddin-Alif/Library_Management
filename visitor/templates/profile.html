@@ -2,7 +2,7 @@
 {%  load crispy_forms_tags %}
 {% block contents %}
 
-<h1>Profile Page</h1>
+<h1>{{request.user}} (Balance: {{request.user.visitormodel.balance}})</h1>
 {{data|length}}
 <table class="table">
     <thead>
